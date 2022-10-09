@@ -8,7 +8,9 @@ export default createStore({
     contador: 0,
     mostrarCine: false,
     showModal: false,
-    butacas: []
+    butacas: [],
+    cleanButacas: [],
+    id: []
   },
   getters: {
   },
@@ -23,11 +25,16 @@ export default createStore({
       state.contador--;
     },
     chooseMovie: (state, index) => {
-      state.pelicula = state.peliculas[index.value];
+      if (state.pelicula !== state.peliculas[index.value]) {
+        state.id = index.value;
+        state.pelicula = state.peliculas[index.value];
+      }
     },
     showCine: (state) => {
-      if(state.pelicula)
+      if (state.pelicula)
         state.mostrarCine = true;
+      else
+        state.mostrarCine = false;
     },
     modal: (state) => {
       state.showModal = true;
@@ -37,17 +44,19 @@ export default createStore({
     },
     compraButacas: (state, id) => {
       state.butacas.push(id);
+    },
+    borrarButacas: (state, id) => {
+      let myIndex = state.butacas.indexOf(id)
+      state.butacas.splice(myIndex, 1);
     }
   },
   actions: {
     async getPelis({ commit }) {
-      const movies = await axios.get('http://localhost:3000/results').then(response => response.data);
+      const movies = await axios.get('http://localhost:3000/results')
+        .then(response => response.data)
+        .catch((error) => console.log(error));
       commit('pelis', movies);
-    },
-    /*async postSeats(seatsAvailables, index) {
-      const asientos = axios.put('http://localhost:3000/results').then(response=> response.data[index].asientos_disponibles = seatsAvailables);
-      console.log(asientos)
-    }*/
+    }
   },
   modules: {
   }

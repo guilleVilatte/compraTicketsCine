@@ -4,7 +4,8 @@
             <label for="peliculas" class="mr-4 text-white">Pick a movie:</label>
             <select name="peliculas" id="peliculas" v-model="searchMovie">
                 <option value=""></option>
-                <option v-for="(pelicula, i) in peliculas" :key="i" :value="i">{{ pelicula.pelicula[0].name }} - ($ {{ pelicula.pelicula[0].precio }})</option>
+                <option v-for="(pelicula, i) in peliculas" :key="i" :value="i">{{ pelicula.pelicula[0].name }} - ($ {{
+                pelicula.pelicula[0].precio }})</option>
             </select>
             <button class="btn ml-5" @click="choose()">choose</button>
         </div>
@@ -22,20 +23,30 @@ store.dispatch('getPelis');
 let peliculas = computed(() => store.state.peliculas);
 
 const choose = () => {
-    store.commit('chooseMovie', searchMovie);
-    store.commit('showCine');
+    if (searchMovie) {
+        store.commit('chooseMovie', searchMovie);
+        store.commit('showCine');
+        if (store.state.cleanButacas[0]){
+            for(let i = 0; i < store.state.cleanButacas.length; i++){
+                for(let j = 0; j < store.state.cleanButacas[i].length; j++)
+                document.querySelectorAll(".asiento")[store.state.cleanButacas[i][j] - 1].style.background = "gray";
+            }
+            store.state.cleanButacas = [];
+        }
+    }
 }
-
 </script>
 
 <style scoped>
-.contenedor{
+.contenedor {
     background: rgb(1, 1, 57);
 }
-#peliculas{
+
+#peliculas {
     border-radius: 3px;
 }
-.btn{
+
+.btn {
     color: white;
     background: rgb(155, 52, 52);
     border-radius: 3px;

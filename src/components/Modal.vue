@@ -27,6 +27,8 @@ let butacas = computed(() => store.state.butacas)
 const close = () => {
     store.commit('closeModal');
     store.state.contador = 0;
+    store.state.cleanButacas.push(store.state.butacas);
+    console.log(store.state.cleanButacas)
     store.state.butacas = [];
 }
 </script>

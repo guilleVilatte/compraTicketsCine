@@ -94,19 +94,18 @@ let peliculas = computed(() => store.state.peliculas);
 let movie = computed(() => store.state.pelicula);
 let contador = computed(() => store.state.contador);
 let show = computed(() => store.state.showModal);
-var index;
 
 const agregarAsiento = (id) => {
-  index = id;
   let selected = document.querySelectorAll(".asiento")[id - 1];
   if (selected.style.background != "white") {
-    store.commit('compraButacas', id)
     if (selected.style.background != "rgb(0, 195, 255)") {
       selected.style.background = "rgb(0, 195, 255)";
+      store.commit('compraButacas', id);
       sumatoria();
     }
     else {
       selected.style.background = "gray";
+      store.commit('borrarButacas', id);
       resta();
     }
   }
@@ -123,9 +122,7 @@ const buy = () => {
     store.commit('modal');
     for (let i = 0; i < store.state.butacas.length; i++) {
       document.querySelectorAll(".asiento")[store.state.butacas[i] - 1].style.background = "white";
-      document.querySelectorAll(".asiento")[store.state.butacas[i] - 1].style.cursor = "default";
     }
-    store.dispatch('postSeats', (store.state.pelicula.asientos_disponibles - store.state.butacas.length), index)
   }
 }
 </script>
