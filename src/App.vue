@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="fondo">
+    <Pelicula class="py-5"></Pelicula>
+    <Cine v-if="showCine"></Cine>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Cine from './components/Cine.vue'
+import Pelicula from './components/Pelicula.vue'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Cine,
+    Pelicula
+  },
+  setup(){
+    const store = useStore();
+    const showCine = computed(() => store.state.mostrarCine)
+    return{
+      showCine
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.fondo{
+  background: rgb(1, 1, 57);
+  height: 100%;
 }
 </style>

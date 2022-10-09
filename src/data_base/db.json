@@ -1,0 +1,44 @@
+{
+    "results": [
+        {
+            "pelicula": [
+                {
+                    "name": "Django",
+                    "precio": 10
+                }
+            ],
+            "asientos_totales" : 48,
+            "asientos_disponibles" : 48
+        },
+        {
+            "pelicula": [
+                {
+                    "name": "El Señor de los Anillos",
+                    "precio": 12
+                }
+            ],
+            "asientos_totales" : 48,
+            "asientos_disponibles" : 48
+        },
+        {
+            "pelicula": [
+                {
+                    "name": "Harry Potter",
+                    "precio": 9
+                }
+            ],
+            "asientos_totales" : 48,
+            "asientos_disponibles" : 48
+        },
+        {
+            "pelicula": [
+                {
+                    "name": "Star Wars",
+                    "precio": 11
+                }
+            ],
+            "asientos_totales" : 48,
+            "asientos_disponibles" : 48
+        }
+    ]
+}
