@@ -74,8 +74,9 @@
         </div>
       </div>
     </div>
-    <div class="text-white text-center" v-if="contador > 0">You have selected {{ store.state.contador }} seats for a
-      price of ${{ store.state.contador * movie.pelicula[0].precio }}</div>
+    <div class="flex justify-center text-white text-center" v-if="contador > 0">You have selected 
+      <div class="celeste mx-1">{{ store.state.contador }}</div> seats for a price of 
+      $<div class="celeste">{{ store.state.contador * movie.pelicula[0].precio }}</div> </div>
     <button class="btn my-8" @click="buy">Buy tickets</button>
     <Modal v-if="show"></Modal>
   </div>
@@ -192,5 +193,9 @@ const buy = () => {
   padding: 7px 20px 10px 20px;
   margin-left: 50%;
   transform: translateX(-50%);
+}
+
+.celeste{
+  color: rgb(0, 221, 255);
 }
 </style>
